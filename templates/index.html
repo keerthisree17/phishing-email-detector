@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Phishing Email Detector</title>
+
+    <style>
+
+        body{
+            background:#020617;
+            color:white;
+            font-family:Arial;
+            text-align:center;
+            padding-top:80px;
+            padding-bottom:80px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        h1{
+            color:#38bdf8;
+            font-size:50px;
+            text-shadow:0 0 20px #38bdf8;
+            margin-bottom:40px;
+        }
+
+        textarea{
+            width:550px;
+            height:220px;
+            background:#0f172a;
+            color:#38bdf8;
+            border:2px solid #38bdf8;
+            border-radius:15px;
+            padding:15px;
+            font-size:18px;
+            outline:none;
+            box-shadow:0 0 20px rgba(56,189,248,0.4);
+            animation:glow 2s infinite;
+        }
+
+        button{
+            margin-top:20px;
+            padding:14px 35px;
+            border:none;
+            border-radius:12px;
+            background:#38bdf8;
+            color:black;
+            font-size:18px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            transform:scale(1.05);
+            box-shadow:0 0 20px #38bdf8;
+        }
+
+        h2{
+            margin-top:40px;
+            color:#f87171;
+            font-size:38px;
+            width:80%;
+        }
+
+        h3{
+            color:#facc15;
+            font-size:30px;
+            margin-top:20px;
+        }
+
+        p{
+            color:#38bdf8;
+            font-size:22px;
+            margin:10px;
+        }
+
+        @keyframes glow {
+
+            0%{
+                box-shadow:0 0 10px #38bdf8;
+            }
+
+            50%{
+                box-shadow:0 0 30px #38bdf8;
+            }
+
+            100%{
+                box-shadow:0 0 10px #38bdf8;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Phishing Email Detector</h1>
+
+    <form action="/check" method="POST">
+
+        <textarea
+            name="email"
+            placeholder="Paste suspicious email here...">{{ email_text }}</textarea>
+
+        <br>
+
+        <button type="submit">
+            Check Email
+        </button>
+
+    </form>
+
+    {% if result %}
+
+        <h2>{{ result }}</h2>
+
+        <h3>
+Risk Level: {{ risk }}        </h3>
+
+    {% endif %}
+
+    {% if threats %}
+
+        <h3>Detected Threats:</h3>
+
+        {% for threat in threats %}
+            <p>{{ threat }}</p>
+        {% endfor %}
+
+    {% endif %}
+
+</body>
+
+</html>
